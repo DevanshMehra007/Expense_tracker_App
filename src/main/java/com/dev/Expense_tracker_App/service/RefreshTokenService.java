@@ -30,4 +30,13 @@ public class RefreshTokenService
                 .build();
         return refreshTokenRepo.save(refreshToken);
     }
+
+    public RefreshToken verifyExpiration(RefreshToken token){
+        if(token.getExpiryDate().compareTo(Instant.now())<0)
+        {
+            refreshTokenRepo.delete(token);
+            throw new RuntimeException(token.getToken() + " Refresh token is expired . Please make a new log in...");
+        }
+        return token;
+    }
 }
