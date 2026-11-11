@@ -68,6 +68,10 @@ public class JwtService
                 .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
     }
 
+    public String generateToken(String username) {
+        return createToken(Map.of(), username);
+    }
+
     private Claims extractAllClaims(String token)
     {
         return Jwts

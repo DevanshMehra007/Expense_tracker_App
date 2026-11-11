@@ -53,12 +53,11 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider()
-    {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsPasswordService(userDetailsServiceImpl);
-        authenticationProvider.setPasswordEncoder(passwordEncoder);
-        return authenticationProvider;
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider provider =
+                new DaoAuthenticationProvider(userDetailsServiceImpl);
+        provider.setPasswordEncoder(passwordEncoder);
+        return provider;
     }
 
     @Bean
